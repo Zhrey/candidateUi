@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: candidate-ui
+  freemarker:
+    cache: false
 eureka:
   instance:
     prefer-ip-address: true
