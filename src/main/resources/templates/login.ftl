@@ -1,13 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<#include "common/header.ftl">
     <meta name="description" content="">
-    <meta name="author" content="">
     <title>登录</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/login.css" rel="stylesheet">
 </head>
 

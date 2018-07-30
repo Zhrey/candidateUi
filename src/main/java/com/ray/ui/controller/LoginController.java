@@ -27,7 +27,6 @@ public class LoginController {
         return LOGIN_PAGE;
     }
     @RequestMapping("/login")
-    @ResponseBody
     public String login() {
         candidateManagementService.toHomePage();
         return HOME_PAGE;
