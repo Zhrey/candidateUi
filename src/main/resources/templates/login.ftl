@@ -7,8 +7,9 @@
 
 <body class="text-center">
 <form class="form-signin">
-    <input type="text" id="username" class="form-control" placeholder="用户名" required autofocus>
-    <input type="password" id="password" class="form-control" placeholder="密码" required style="margin-top: 20px">
+    <p id="errorMsg" style="color: red;text-align: left;display: none;"></p>
+    <input type="text" id="username" class="form-control" placeholder="用户名" required autofocus value="admin">
+    <input type="password" id="password" class="form-control" placeholder="密码" required value="111111" style="margin-top: 20px">
     <div class="checkbox mb-3">
         <label>
             <input type="checkbox" value="remember-me"> 记住密码
@@ -24,7 +25,14 @@
     $(function () {
         $('.b-login').click(function () {
             $('.b-login').addClass('disabled');
-            var params = {loginName: $('#username').val(), loginPwd: $('#password').val()};
+            if(!$('#username').val() || !$('#password').val()) {
+
+                $('#errorMsg').text('用户名或密码不能为空！');
+                $('#errorMsg').show();
+                $('.b-login').removeClass('disabled');
+                return;
+            }
+            var params = {username: $('#username').val(), password: $('#password').val()};
             $.ajax({
                 url: '/login', type: 'post', data: JSON.stringify(params), success: function (res) {
                     if (res.code == 0) {

@@ -1,8 +1,3 @@
-<script>
-    if ($.getCookie('token') == '' || $.getCookie('token') == null) {
-        location = '/';
-    }
-</script>
 <#--bootstrapValidator的css文件-->
     <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.min.css">
 <#--bootstrapValidator的JS文件-->
@@ -23,17 +18,6 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="n-workbench"><a href="home">工作台 <span class="sr-only">(current)</span></a></li>
-                <!--
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">产品与服务 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">产品介绍</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">关于我们</a></li>
-                    </ul>
-                </li>
-                -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/myMessage"><span>消息</span><span class="badge" style="margin: -3px 0 0 5px;"
@@ -54,7 +38,7 @@
 
                         </li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/common/logout">退出系统</a></li>
+                        <li><a href="/logout">退出系统</a></li>
                     </ul>
                 </li>
             </ul>
@@ -109,10 +93,11 @@
                 </div>
             </div>
 <script>
-    $.getJSON('common/userInfo', function (res) {
-        $('.nav-username').text(res.data.name);
-        fileServiceUrl = $.getCookie('url');
-    });
+    // TODO 根据token获取个人信息
+    $('.nav-username').text("管理员");
+    // $.getJSON('common/userInfo', function (res) {
+    //     $('.nav-username').text(res.data.name);
+    // });
 
     $(function () {
 
@@ -170,35 +155,7 @@
 
         addFormValidate();
 
-        find();
-        setTimeout(function () {
-          find();
-        }, 10000);
-
     });
-
-    function find() {
-        $.ajax({
-            type: "post",
-            url: "passwordChange/find",
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify({"pageNo ": 1, "pageSize": 1,"readFlag":0}),
-            success: function (data) {
-                if (data.data) {
-                    var count = data.data.count;
-                    if (count <= 0) {
-                        $("#message").hide()
-                    } else {
-                        $("#message").html(count);
-                    }
-                }
-            },
-            error: function () {
-                bootbox.alert("系统异常,请联系管理员!");
-            }
-        });
-    }
 
     function addFormValidate() {
 
