@@ -1,55 +1,124 @@
-var filedownloadurl = 'file/downloadfile?filePath=';
-//父表 文件履历按钮
-/**
- * @return {string}
- */
-function countoperateFormatter(value, row, index) {
-    return [
-        '<button type="button" data-toggle="modal" data-target="#myModal" id="filemodal" class="btn btn-primary btn-xs" >文件履历</button>'
-    ].join('');
-}
+$(function () {
+    //初始化上传控件
+    fileInput("fileModel");
+    //查询
+    $("#searchbtn").on('click', function () {
+        $('#countTable').bootstrapTable('refresh');
+    });
+    //上传简历
+    $("#uploadFiles").on('click', function () {
+        $('#addfilemodel').modal();
+    });
 
-//子表 下载及删除按钮
-/**
- * @return {string}
- */
-function operateFormatter(value, row, index) {
-    return [
-        '<button id="filedown" type="button" class="btn btn-sm btn-primary">下载</button>&nbsp',
-        '<button id="filedelete" type="button" class="btn btn-sm btn-danger">删除</button>'
-    ].join('');
-}
-
-
-//文件履历model下载文件方法
-/**
- * @return {string}
- */
-function downLoadFile(obj) {
-    var data = obj.attributes;
-    bootbox.confirm({
-        title: "文件下载",
-        message: "是否下载文件",
-        buttons: {
-            cancel: {
-                label: '<i class="fa fa-times"></i> 取消'
-            },
-            confirm: {
-                label: '<i class="fa fa-check"></i> 下载'
-            }
-        },
-        callback: function (result) {
-            if (result) {
-                var filePath = data.file_url.value;
-                window.location.href = filePath;
-            }
+    //打包下载
+    $('#downloadFiles').click(function () {
+        var countList= $("#countTable").bootstrapTable('getSelections');
+        if(countList.length<=0){
+            bootbox.alert("打包下载请选中一行");
+        }else {
+            bootbox.confirm({
+                title: "文件下载",
+                message: "是否下载文件",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> 取消'
+                    },
+                    confirm: {
+                        label: '<i class="fa fa-check"></i> 下载'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        window.location.href = Countfilesdownloadurl + "countList=" + JSON.stringify(countList);
+                    }
+                }
+            });
         }
     });
+
+    //初始化表格
+    initTable();
+});
+
+function initTable() {
+    $("#resumeTable").bootstrapTable('destroy');
+    $('#resumeTable').bootstrapTable({
+        url: 'resume/searchResume',
+        method: 'post',
+        pagination: true,
+        sidePagination: "server",
+        contentType: "application/json",
+        striped: true,
+        dataType: "json",
+        searchTimeOut: 5000,
+        queryParamsType: '',
+        pageSize: 10,
+        pageNumber: 1,
+        pageList: [10, 25],
+        queryParams: function queryParams(params) {
+
+            //设置查询参数
+            var param = {
+                pageSize: params.pageSize,
+                pageNumber: params.pageNumber
+            };
+            return param;
+        },
+        striped: true,
+        columns: [
+            {
+                field: 'id',
+                title: 'id',
+                visible: false
+            },
+            {
+                field: 'canName',
+                title: '候选人姓名',
+                width: '15%'
+            },
+            {
+                title: '性别',
+                field: 'sex',
+                width: '10%'
+            },
+            {
+                title: '工作年限',
+                field: 'workYears',
+                width: '10%'
+            },
+            {
+                title: '简历名称',
+                field: 'resumeName',
+                width: '17%'
+            },
+            {
+                field: 'operate',
+                title: '操作',
+                align: 'center',
+                events: operateEvents,
+                formatter: operateFormatter,
+                width: '17%'
+            }
+        ],
+        onLoadSuccess: function (data) {
+
+        }
+    });
+
+}
+
+function operateFormatter(value, row, index) {
+
+    return '<button type="button" class="btn btn-primary btn-xs" id="fileDetail">详情</button>' +
+        '<button type="button" class="btn btn-primary btn-xs" id="fileDownload" style="margin-left: 5px">下载</button>';
+    '<button type="button" class="btn btn-cancel btn-xs" id="fileDelete" style="margin-left: 5px">删除</button>';
 }
 
 //下载、删除  按钮功能
 window.operateEvents = {
-    "click #filedown": function (e, vlaue, row) {
+    "click #fileDetail": function (e, vlaue, row) {
+    },
+    "click #fileDownload": function (e, vlaue, row) {
         bootbox.confirm({
             title: "文件下载",
             message: "是否下载文件",
@@ -71,7 +140,7 @@ window.operateEvents = {
             }
         });
     },
-    "click #filedelete": function (e, vlaue, row) {
+    "click #fileDelete": function (e, vlaue, row) {
         bootbox.confirm({
             title: "文件删除",
             message: "是否删除文件",
@@ -145,3 +214,78 @@ window.operateEvents = {
         });
     }
 };
+//文件履历model下载文件方法
+/**
+ * @return {string}
+ */
+function downLoadFile(obj) {
+    var data = obj.attributes;
+    bootbox.confirm({
+        title: "文件下载",
+        message: "是否下载文件",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> 取消'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> 下载'
+            }
+        },
+        callback: function (result) {
+            if (result) {
+                var filePath = data.file_url.value;
+                window.location.href = filePath;
+            }
+        }
+    });
+}
+
+
+function fileInput(id) {
+
+    // 允许上传文件数
+    var fileCount = 1;
+    // 上传大小
+    var fileSize = 20480;
+    // 上传格式
+    var extensions = ["docx","doc"];
+
+    $('#' + id).fileinput({
+        // 上传文件路径
+        uploadUrl: "/filemanage/uploadCompanyModel",
+        //是否显示拖拽区域
+        dropZoneEnabled: false,
+        // 接收的文件后缀
+        allowedFileExtensions: extensions,
+        // 是否显示上传按钮
+        showUpload: false,
+        // 是否显示移除按钮
+        showRemove: false,
+        // 上传大小，单位为kb
+        maxFileSize: fileSize,
+        // 是否自动替换当前图片
+        autoReplace: true,
+        // 表示允许同时上传的最大文件个数
+        maxFileCount: fileCount,
+        // 设置语言
+        language: 'zh',
+        // 异步上传
+        uploadAsync: true,
+        //当文件不符合规则，就不显示预览
+        removeFromPreviewOnError: true
+
+    }).on("filebatchselected", function (event, files) {
+        $(this).fileinput("upload");
+    }).on("fileuploaded", function (event, data, previewId, index) {
+
+        if (data.response && data.response.code == "0") {
+
+        }else if(data.response){
+            bootbox.alert(data.response.errors[0].message);
+        }else {
+            bootbox.alert("上传失败！");
+        }
+        $('#addfilemodel').modal('hide');
+    });
+}
+

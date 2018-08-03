@@ -1,10 +1,16 @@
     <#include "common/header.ftl">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-table.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+    <#--fileinput的css文件-->
+    <link rel="stylesheet" type="text/css" href="css/fileinput.min.css">
     <script type="text/javascript" src="js/bootstrap-table.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-table-zh-CN.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-select.js"></script>
     <script type="text/javascript" src="js/filemanage/filemanage.js"></script>
+    <#--fileinput的JS文件-->
+    <script type="text/javascript" src="js/fileinput.min.js"></script>
+    <#--fileinput的中文包-->
+    <script type="text/javascript" src="js/fileinput.zh.js"></script>
     <#--bootbox的JS文件-->
     <script type="text/javascript" src="js/bootbox.min.js"></script>
 
@@ -80,6 +86,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -100,217 +107,5 @@
     </div><!-- /.modal-content -->
 </div><!-- /.modal -->
 
-<script type="text/javascript">
-    $(function () {
-        //查询
-        $("#searchbtn").on('click', function () {
-            $('#countTable').bootstrapTable('refresh');
-        });
-
-        //打包下载
-        $('#downloadFiles').click(function () {
-            var countList= $("#countTable").bootstrapTable('getSelections');
-            if(countList.length<=0){
-                bootbox.alert("打包下载请选中一行");
-            }else {
-                bootbox.confirm({
-                    title: "文件下载",
-                    message: "是否下载文件",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> 取消'
-                        },
-                        confirm: {
-                            label: '<i class="fa fa-check"></i> 下载'
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                            window.location.href = Countfilesdownloadurl + "countList=" + JSON.stringify(countList);
-                        }
-                    }
-                });
-            }
-        });
-
-        //初始化表格
-        initTable();
-    });
-
-    function initTable() {
-        $("#resumeTable").bootstrapTable('destroy');
-        $('#resumeTable').bootstrapTable({
-            url: 'resume/searchResume',
-            method: 'post',
-            pagination: true,
-            sidePagination: "server",
-            contentType: "application/json",
-            striped: true,
-            dataType: "json",
-            searchTimeOut: 5000,
-            queryParamsType: '',
-            pageSize: 10,
-            pageNumber: 1,
-            pageList: [10, 25],
-            queryParams: function queryParams(params) {
-
-                //设置查询参数
-                var param = {
-                    pageSize: params.pageSize,
-                    pageNumber: params.pageNumber
-                };
-                return param;
-            },
-            striped: true,
-            columns: [
-                {
-                    field: 'id',
-                    title: 'id',
-                    visible: false
-                },
-                {
-                    field: 'canName',
-                    title: '候选人姓名',
-                    width: '15%'
-                },
-                {
-                    title: '性别',
-                    field: 'sex',
-                    width: '10%'
-                },
-                {
-                    title: '工作年限',
-                    field: 'workYears',
-                    width: '10%'
-                },
-                {
-                    title: '简历名称',
-                    field: 'resumeName',
-                    width: '17%'
-                },
-                {
-                    field: 'operate',
-                    title: '操作',
-                    align: 'center',
-                    events: operateEvents,
-                    formatter: operateFormatter,
-                    width: '17%'
-                }
-            ],
-            onLoadSuccess: function (data) {
-
-            }
-        }
-
-    }
-
-    function operateFormatter(value, row, index) {
-
-        return '<button type="button" class="btn btn-primary btn-xs" id="fileDetail">详情</button>' +
-                '<button type="button" class="btn btn-primary btn-xs" id="fileDownload" style="margin-left: 5px">下载</button>';
-                '<button type="button" class="btn btn-cancel btn-xs" id="fileDelete" style="margin-left: 5px">删除</button>';
-    }
-
-    //下载、删除  按钮功能
-    window.operateEvents = {
-        "click #fileDetail": function (e, vlaue, row) {
-        },
-        "click #fileDownload": function (e, vlaue, row) {
-            bootbox.confirm({
-                title: "文件下载",
-                message: "是否下载文件",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> 取消'
-                    },
-                    confirm: {
-                        label: '<i class="fa fa-check"></i> 下载'
-                    }
-                },
-                callback: function (result) {
-                    if (result) {
-                        var filePath = row.filePath;
-                        var fileName = row.name;
-                        var url = filedownloadurl + filePath + '&fileName=' + fileName;
-                        window.location.href = url;
-                    }
-                }
-            });
-        },
-        "click #fileDelete": function (e, vlaue, row) {
-            bootbox.confirm({
-                title: "文件删除",
-                message: "是否删除文件",
-                buttons: {
-                    cancel: {
-                        label: '<i class="fa fa-times"></i> 取消'
-                    },
-                    confirm: {
-                        label: '<i class="fa fa-check"></i> 删除'
-                    }
-                },
-                callback: function (result) {
-                    if (result) {
-                        var id = row.id;
-                        $.ajax({
-                            url: 'filemanage/delfile', type: 'post', data: id, success: function (rst) {
-                                $("#searchbtn").click();
-                            }, dataType: 'json', contentType: 'application/json'
-                        });
-                    }
-                }
-            });
-        },
-        // 点击文件履历按钮，查询出所有文件
-        "click #filemodal": function (e, vlaue, row) {
-            //dataflag  区分是否查全部文件
-            var params = {countId: row.id, dataFlag: 1,pageSize:200};
-            $("#modalbody").text("");
-            $.ajax({
-                url: 'filemanage/getfile', type: 'post', data: JSON.stringify(params), success: function (rst) {
-                    $('#myModal').modal('show');
-                    var total = rst.data.total;
-                    var fileline = 0;
-                    var fileNolist = [];
-                    for (var i = 0; i < total; i++) {
-                        var libollen = true;
-                        var data = rst.data.rows[i];
-                        var fileNo = data.fileNo;
-                        var fileinum;
-                        var fileName = data.name;
-                        var filePath = data.filePath;
-                        var url = filedownloadurl + filePath + '&fileName=' + fileName;
-                        for (var j = 0; j < fileNolist.length; j++) {
-                            if (fileNo === fileNolist[j]) {
-                                libollen = false;
-                                fileinum = j;
-                                break;
-                            }
-                        }
-                        if (libollen) {
-                            var aclass = "abtn_" + fileline;
-                            $("#modalbody").append("<li id=\"li_" + fileline + "\" style=\"margin-bottom: 20px;\"></li>");
-                            if (filePath == null || filePath === undefined || filePath === "") {
-                                $("#li_" + fileline).append("<a class=\"btn btn-danger\" disabled>" + fileName + "</a>");
-                            } else {
-                                $("#li_" + fileline).append("<a class=" + aclass + " onclick=\"downLoadFile(this)\" file_url=" + url + " file_name=" + fileName + ">" + fileName + "</a>");
-                            }
-                            $("." + aclass).addClass(aclass + " btn btn-success");
-                            fileline++;
-                            fileNolist.push(fileNo);
-                        } else {
-                            if (filePath == null || filePath === undefined || filePath === "") {
-                                $("#li_" + fileinum).append("----<a class=\"btn btn-danger\" disabled>" + fileName + "</a>");
-                            } else {
-                                $(".abtn_" + fileinum).attr("class", "btn btn-primary");
-                                $("#li_" + fileinum).append("----<a class=\"abtn_" + fileinum + " btn btn-success\" onclick=\"downLoadFile(this)\" file_url=" + url + " file_name=" + fileName + ">" + fileName + "</a>");
-                            }
-                        }
-                    }
-                }, dataType: 'json', contentType: 'application/json'
-            });
-        }
-    };
-</script>
 </body>
 </html>
