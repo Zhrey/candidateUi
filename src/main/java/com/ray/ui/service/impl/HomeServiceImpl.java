@@ -2,7 +2,7 @@ package com.ray.ui.service.impl;
 
 import com.ray.cloud.framework.base.dto.ResultDTO;
 import com.ray.core.sdk.dto.UserBaseDTO;
-import com.ray.core.sdk.service.CandidateManagementService;
+import com.ray.core.sdk.service.CandidateManagementSdkService;
 import com.ray.ui.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class HomeServiceImpl implements HomeService {
 
     @Autowired
-    private CandidateManagementService candidateManagementService;
+    private CandidateManagementSdkService candidateManagementService;
 
     @Override
     public ResultDTO login(UserBaseDTO userBaseDTO) {
