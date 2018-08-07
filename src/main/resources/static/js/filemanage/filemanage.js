@@ -252,7 +252,7 @@ function fileInput(id) {
 
     $('#' + id).fileinput({
         // 上传文件路径
-        uploadUrl: "/filemanage/uploadCompanyModel",
+        uploadUrl: "/resume/uploadResume",
         //是否显示拖拽区域
         dropZoneEnabled: false,
         // 接收的文件后缀

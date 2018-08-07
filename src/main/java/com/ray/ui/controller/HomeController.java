@@ -2,7 +2,6 @@ package com.ray.ui.controller;
 
 import com.ray.cloud.framework.base.dto.ResultDTO;
 import com.ray.core.sdk.dto.UserBaseDTO;
-import com.ray.core.sdk.service.CandidateManagementService;
 import com.ray.ui.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

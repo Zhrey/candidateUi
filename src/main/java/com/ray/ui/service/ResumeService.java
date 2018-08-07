@@ -2,6 +2,7 @@ package com.ray.ui.service;
 
 import com.ray.cloud.framework.base.dto.ResultDTO;
 import com.ray.core.sdk.dto.UserBaseDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Author: ZhangRui
@@ -18,4 +19,6 @@ public interface ResumeService {
      * @date: Created in 15:10 2018/7/31
      */
     ResultDTO searchResume();
+
+    ResultDTO uploadResume(MultipartFile multipartFile);
 }
