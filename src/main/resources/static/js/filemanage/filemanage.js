@@ -248,7 +248,7 @@ function fileInput(id) {
     // 上传大小
     var fileSize = 20480;
     // 上传格式
-    var extensions = ["docx","doc"];
+    var extensions = ["xls","xlsx"];
 
     $('#' + id).fileinput({
         // 上传文件路径
@@ -277,7 +277,7 @@ function fileInput(id) {
     }).on("filebatchselected", function (event, files) {
         $(this).fileinput("upload");
     }).on("fileuploaded", function (event, data, previewId, index) {
-
+        
         if (data.response && data.response.code == "0") {
 
         }else if(data.response){
