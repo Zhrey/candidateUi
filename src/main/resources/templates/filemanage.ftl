@@ -14,13 +14,13 @@
     <#--bootbox的JS文件-->
     <script type="text/javascript" src="js/bootbox.min.js"></script>
 
-    <title>合同查询</title>
+    <title>简历管理</title>
     <style>
         .mb-file-manage .bar-file-manage {
             background: #e7e7e7;
         }
 
-        .mb-file-manage .menu-file-search {
+        .mb-file-manage {
             border-bottom: 2px solid #2d8cf0;
         }
 
@@ -38,7 +38,7 @@
             <div class="menu-content">
                 <div class="container-fluid" style="margin-top: 20px">
                     <label for="contractName" class="col-sm-1 control-label"
-                           style="width: 90px; text-align: left;padding-left: 19px;margin-top: 18px" >合同名称</label>
+                           style="width: 110px; text-align: left;padding-left: 19px;margin-top: 18px" >候选人姓名</label>
                     <div class="input-group-btn">
                         <div class="col-sm-2">
                             <input type="text" class="form-control" style="margin: 10px 15px;" id="contractName"
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-10">
+                        <div class="col-sm-12">
                             <table id="resumeTable"></table>
                         </div>
                     </div>

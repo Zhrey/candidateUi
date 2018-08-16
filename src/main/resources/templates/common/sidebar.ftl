@@ -13,7 +13,7 @@
                 <i class="fas fa-circle has-num"></i>
             </li>
             <li id="642a6f032dc74814a778d314a3585816" class="bar-user-management"  data-placement="right" title="候选人信息" style="display: block;">
-                <a href="javascript:void(0)">
+                <a href="candidate">
                     <i class="fas fa-users"></i>候选人信息
                 </a>
             </li>

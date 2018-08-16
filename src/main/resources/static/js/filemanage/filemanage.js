@@ -3,10 +3,11 @@ $(function () {
     fileInput("fileModel");
     //查询
     $("#searchbtn").on('click', function () {
-        $('#countTable').bootstrapTable('refresh');
+        $('#resumeTable').bootstrapTable('refresh');
     });
     //上传简历
     $("#uploadFiles").on('click', function () {
+        $('#fileModel').fileinput('clear');
         $('#addfilemodel').modal();
     });
 
@@ -60,7 +61,7 @@ function initTable() {
             //设置查询参数
             var param = {
                 pageSize: params.pageSize,
-                pageNumber: params.pageNumber
+                pageNo: params.pageNumber
             };
             return param;
         },
@@ -70,34 +71,52 @@ function initTable() {
                 field: 'id',
                 title: 'id',
                 visible: false
-            },
-            {
-                field: 'canName',
-                title: '候选人姓名',
-                width: '15%'
+            },{
+                field: 'name',
+                title: '候选人姓名'
             },
             {
                 title: '性别',
-                field: 'sex',
-                width: '10%'
+                field: 'sex'
             },
             {
                 title: '工作年限',
-                field: 'workYears',
-                width: '10%'
+                field: 'workingTime'
+            },
+            {
+                title: '联系方式',
+                field: 'mobile'
             },
             {
                 title: '简历名称',
-                field: 'resumeName',
-                width: '17%'
+                field: 'resumeName'
+            },
+            {
+                title: '标签名称',
+                field: 'tagName'
+            },
+            {
+                title: '应聘职位',
+                field: 'jobPosition'
+            },
+            {
+                title: '现在单位',
+                field: 'currentCompany'
+            },
+            {
+                title: '期望月薪(税前)',
+                field: 'expectSalary'
+            },
+            {
+                title: '投递(收藏)时间',
+                field: 'deliveryDate'
             },
             {
                 field: 'operate',
                 title: '操作',
                 align: 'center',
                 events: operateEvents,
-                formatter: operateFormatter,
-                width: '17%'
+                formatter: operateFormatter
             }
         ],
         onLoadSuccess: function (data) {
@@ -277,9 +296,9 @@ function fileInput(id) {
     }).on("filebatchselected", function (event, files) {
         $(this).fileinput("upload");
     }).on("fileuploaded", function (event, data, previewId, index) {
-        
         if (data.response && data.response.code == "0") {
-
+            bootbox.alert("上传成功！");
+            $('#resumeTable').bootstrapTable('refresh');
         }else if(data.response){
             bootbox.alert(data.response.errors[0].message);
         }else {

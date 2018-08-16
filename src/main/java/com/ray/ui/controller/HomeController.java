@@ -26,6 +26,7 @@ public class HomeController {
     private static final String LOGIN_PAGE = "login";
     private static final String HOME_PAGE = "home";
     private static final String FILE_MANAGE_PAGE = "filemanage";
+    private static final String CANDIDATE_PAGE = "candidate";
 
     @Autowired
     private HomeService homeService;
@@ -38,6 +39,11 @@ public class HomeController {
     @RequestMapping("/home")
     public String homePage() {
         return HOME_PAGE;
+    }
+
+    @RequestMapping("/candidate")
+    public String candidatePage() {
+        return CANDIDATE_PAGE;
     }
     @RequestMapping("/filemanage")
     public ModelAndView fileManagePage() {
