@@ -169,3 +169,64 @@ body{
 .has-feedback .form-control-feedback {
     right: 15px;
 }
+
+@media (min-width: 768px) {
+    .navbar {
+        border-radius: 0px;
+    }
+}
+
+.navbar-default {
+    background-color: #fff;
+    border-color: #e7e7e7;
+}
+
+.tooltip.right .tooltip-arrow {
+    left: 0;
+    margin-top: -5px;
+    border-width: 5px 5px 5px 0;
+    border-right-color: #e7e7e7;
+}
+
+.tooltip-inner {
+    height: 50px;
+    line-height: 45px;
+    max-with: 200px;
+    padding: 3px 8px;
+    color: #555;
+    text-align: center;
+    background-color: #e7e7e7;
+    border-radius: 4px;
+}
+
+.nav-pills{
+    margin-bottom: 10px;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+    background-color: #fff;
+    color: #2d8cf0;
+    border-bottom: 2px solid #2d8cf0;
+}
+.nav-pills>li>a {
+    border-radius: 0px;
+    padding-bottom: 0;
+    cursor: pointer;
+}
+.nav-pills>li>a:hover, .nav-pills>li>a:focus{
+    background-color: #fff;
+}
+
+.col-sm-2.control-label{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.form-horizontal .has-feedback .form-control-feedback{
+    right: 25px;
+}
+
+.fixed-table-pagination div.pagination, .fixed-table-pagination .pagination-detail{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}

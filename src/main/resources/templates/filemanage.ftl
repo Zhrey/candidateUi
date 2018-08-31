@@ -1,18 +1,16 @@
     <#include "common/header.ftl">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
     <#--fileinput的css文件-->
-    <link rel="stylesheet" type="text/css" href="css/fileinput.min.css">
-    <script type="text/javascript" src="js/bootstrap-table.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-table-zh-CN.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-select.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.8/css/fileinput.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="js/filemanage/filemanage.js"></script>
     <#--fileinput的JS文件-->
-    <script type="text/javascript" src="js/fileinput.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.8/js/fileinput.min.js"></script>
     <#--fileinput的中文包-->
-    <script type="text/javascript" src="js/fileinput.zh.js"></script>
-    <#--bootbox的JS文件-->
-    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.8/js/locales/zh.min.js"></script>
 
     <title>简历管理</title>
     <style>

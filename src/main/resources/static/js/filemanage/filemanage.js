@@ -53,9 +53,9 @@ function initTable() {
         dataType: "json",
         searchTimeOut: 5000,
         queryParamsType: '',
-        pageSize: 10,
+        pageSize: 2,
         pageNumber: 1,
-        pageList: [10, 25],
+        pageList: [2, 25],
         queryParams: function queryParams(params) {
 
             //设置查询参数

@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/fontawesome-all.min.css?${.now?string["MMddhhmmSSsss"]}"/>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css?${.now?string["MMddhhmmSSsss"]}"/>
-<link rel="stylesheet" type="text/css" href="css/bootstrap-cover.css?${.now?string["MMddhhmmSSsss"]}"/>
-<link rel="stylesheet" type="text/css" href="css/common/layout.css?${.now?string["MMddhhmmSSsss"]}"/>
-<script type="text/javascript" src="js/jquery.min.js?${.now?string["MMddhhmmSSsss"]}"></script>
-<script type="text/javascript" src="js/bootstrap.min.js?${.now?string["MMddhhmmSSsss"]}"></script>
-<script type="text/javascript" src="js/bootbox.min.js?${.now?string["MMddhhmmSSsss"]}"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/layout.css"/>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.min.js"></script>

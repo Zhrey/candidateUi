@@ -1,7 +1,7 @@
 <#--bootstrapValidator的css文件-->
-    <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css">
 <#--bootstrapValidator的JS文件-->
-    <script type="text/javascript" src="js/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
 <nav class="navbar navbar-default topbar">
     <div class="container-fluid">
         <div class="navbar-header">
