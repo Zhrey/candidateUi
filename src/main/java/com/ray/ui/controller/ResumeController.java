@@ -40,7 +40,7 @@ public class ResumeController {
 
         if (multipartFile != null) {
             File file = CountFileUtil.gettempfile(multipartFile);
-            return candidateManagementSdkService.uploadFile(file);
+            return candidateManagementSdkService.uploadFile(file,multipartFile.getOriginalFilename());
         } else {
             return ResultDTO.failure(ResultError.error("没有识别简历！"));
         }

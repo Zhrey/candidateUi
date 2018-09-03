@@ -3,7 +3,7 @@ $(function () {
     fileInput("fileModel");
     //查询
     $("#searchbtn").on('click', function () {
-        $('#resumeTable').bootstrapTable('refresh');
+        initTable();
     });
     //上传简历
     $("#uploadFiles").on('click', function () {
@@ -128,9 +128,7 @@ function initTable() {
 
 function operateFormatter(value, row, index) {
 
-    return '<button type="button" class="btn btn-primary btn-xs" id="fileDetail">详情</button>' +
-        '<button type="button" class="btn btn-primary btn-xs" id="fileDownload" style="margin-left: 5px">下载</button>';
-    '<button type="button" class="btn btn-cancel btn-xs" id="fileDelete" style="margin-left: 5px">删除</button>';
+    return '<button type="button" class="btn btn-primary btn-xs" id="fileDownload" style="margin-left: 5px">下载</button>';
 }
 
 //下载、删除  按钮功能
@@ -151,9 +149,10 @@ window.operateEvents = {
             },
             callback: function (result) {
                 if (result) {
-                    var filePath = row.filePath;
-                    var fileName = row.name;
-                    var url = filedownloadurl + filePath + '&fileName=' + fileName;
+                    var file = row.files;
+                    var filePath = file[0].filePath;
+                    var fileName = file[0].fileName;
+                    var url = fileServerUrl +"?filePath="+ filePath + '&fileName=' + fileName;
                     window.location.href = url;
                 }
             }

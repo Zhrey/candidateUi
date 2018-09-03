@@ -1,7 +1,7 @@
 $(function () {
     //查询
     $("#searchbtn").on('click', function () {
-        $('#countTable').bootstrapTable('refresh');
+        initTable();
     });
 
     //初始化表格
