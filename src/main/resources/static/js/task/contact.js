@@ -89,15 +89,15 @@ function initTable() {
 
 function operateFormatter(value, row, index) {
 
-    return '<button type="button" class="btn btn-primary btn-xs" id="detail">详情</button>' +
-    '<button type="button" class="btn btn-primary btn-xs" id="edit" style="margin-left: 5px">编辑</button>';
+    return '<button type="button" class="btn btn-primary btn-xs" id="editInfo">沟通信息</button>' +
+    '<button type="button" class="btn btn-primary btn-xs" id="interview" style="margin-left: 5px">确认到面</button>';
 }
 
 //下载、删除  按钮功能
 window.operateEvents = {
-    "click #detail": function (e, vlaue, row) {
+    "click #editInfo": function (e, vlaue, row) {
     },
-    "click #edit": function (e, vlaue, row) {
+    "click #interview": function (e, vlaue, row) {
     }
 };
 
@@ -107,10 +107,9 @@ window.operateEvents = {
  * @return {string}
  */
 function InitSubTable(index, row, $detail) {
-    var countId = row.id;
     var cur_table = $detail.html('<table></table>').find('table');
     $(cur_table).bootstrapTable({
-        url: "task/getSituation",            //请求后台的URL（*）
+        url: "task/searchSituation",            //请求后台的URL（*）
         // dataType: "json",
         method: "post",                     //请求方式（*）
         striped: true,                      //是否显示行间隔色
@@ -129,18 +128,16 @@ function InitSubTable(index, row, $detail) {
             var temp = {
                 pageNumber: params.pageNumber,
                 pageSize: params.pageSize,
-                countId: countId,
-                // fileType:0,     //0 合同文件
-                dataFlag: 0
+                personId: row.personId
             };
             return temp;
         },
         //格式化返回参数
         responseHandler: function (res) {
-            if (res.data && res.data.rows) {
+            if (res) {
                 return {
-                    "total": res.data.total,//总页数
-                    "rows": res.data.rows   //数据
+                    "total": res.total,//总页数
+                    "rows": res.rows   //数据
                 };
             } else {
                 return {
@@ -151,35 +148,16 @@ function InitSubTable(index, row, $detail) {
         },
         columns: [
             {
-                title: '所含文件',
-                field: 'name'
+                title: '信息类型',
+                field: 'situationType'
             },
             {
-                title: '文件类型',
-                field: 'fileType'
+                title: '描述',
+                field: 'memo'
             },
             {
-                title: '文件描述',
-                field: 'desp'
-            },
-            {
-                title: '上传人',
-                field: 'createUser'
-            },
-            {
-                title: '上传时间',
-                field: 'updateTime',
-                formatter: function (value, row, index) {
-                    return new Date(value).toLocaleString().substring(0, 9);
-                }
-            },
-            {
-                field: 'filePath',
-                title: '操作',
-                width: '120',
-                align: 'center',
-                events: operateEvents,
-                formatter: operateFormatter
+                title: '时间',
+                field: 'talkDate'
             }
         ]
     });
