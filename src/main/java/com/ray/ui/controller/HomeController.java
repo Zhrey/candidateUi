@@ -27,6 +27,10 @@ public class HomeController {
     private static final String HOME_PAGE = "home";
     private static final String FILE_MANAGE_PAGE = "filemanage";
     private static final String CANDIDATE_PAGE = "candidate";
+    private static final String CONTACT_PAGE = "contact";
+    private static final String ENTRY_PAGE = "entry";
+    private static final String GIVE_UP_PAGE = "giveUp";
+    private static final String INTERVIEW_PAGE = "interview";
 
     @Autowired
     private HomeService homeService;
@@ -45,6 +49,24 @@ public class HomeController {
     public String candidatePage() {
         return CANDIDATE_PAGE;
     }
+
+    @RequestMapping("/contact")
+    public String contactPage() {
+        return CONTACT_PAGE;
+    }
+    @RequestMapping("/entry")
+    public String entryPage() {
+        return ENTRY_PAGE;
+    }
+    @RequestMapping("/giveUp")
+    public String giveUpPage() {
+        return GIVE_UP_PAGE;
+    }
+    @RequestMapping("/interview")
+    public String interviewPage() {
+        return INTERVIEW_PAGE;
+    }
+
     @RequestMapping("/filemanage")
     public ModelAndView fileManagePage() {
         ModelAndView modelAndView = new ModelAndView(FILE_MANAGE_PAGE);

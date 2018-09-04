@@ -7,7 +7,7 @@
     <div>
         <ul>
             <li id="7f11ff413a4b4423af93c4c74b979598" class="bar-personal-task"  data-placement="right" title="个人事务" style="display: block;">
-                <a href="javascript:void(0)">
+                <a href="/contact">
                     <i class="far fa-user"></i>个人事务
                 </a>
                 <i class="fas fa-circle has-num"></i>
