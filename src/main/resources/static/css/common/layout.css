@@ -71,7 +71,7 @@ body{
 .sidebar-left ul li {
     position: relative;
     list-style: none;
-    height: 50px;
+    min-height: 50px;
     line-height: 50px;
 }
 
@@ -96,10 +96,17 @@ body{
 
 .sidebar-left ul li a {
     text-decoration: none;
+    height: 50px;
+    line-height: 28px;
+    width: 100%;
     color: #2d8cf0;
     display: block;
     text-align: center;
     cursor: pointer;
+}
+
+.sidebar-left ul li span {
+    line-height: 25px;
 }
 
 .sidebar-left.list-bar ul li a i {
@@ -108,6 +115,7 @@ body{
 
 .sidebar-left ul li a:hover {
     background: #e7e7e7;
+    height: 50px;
 }
 
 .view-container{

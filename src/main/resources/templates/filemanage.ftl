@@ -34,7 +34,7 @@
     <#include "common/sidebar.ftl">
         <div class="view-container">
             <div class="menu-content">
-                <div class="container-fluid" style="margin-top: 20px">
+                <div class="container-fluid" style="margin-top: 40px">
                     <label for="contractName" class="col-sm-1 control-label"
                            style="width: 110px; text-align: left;padding-left: 19px;margin-top: 18px" >候选人姓名</label>
                     <div class="input-group-btn">

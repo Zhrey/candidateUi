@@ -1,26 +1,10 @@
-// $.getJSON('common/getList', function (res) {
-//     if (!res.data) {
-//         bootbox.alert('未取到系统权限。', function () {
-//             location = '/';
-//         });
-//     } else {
-//         initMenu(res.data);
-//     }
-// });
-// $.getJSON('common/countToDoTask', function (res) {
-//     if (res.code == 0 && res.data > 0) {
-//         $('.bar-personal-task .has-num').show();
-//     } else {
-//         $('.bar-personal-task .has-num').hide();
-//     }
-// });
-// $.getJSON('common/countBorrowTodoTask', function (res) {
-//     if (res.code == 0 && res.data > 0) {
-//         $('.bar-contr-file .has-num').show();
-//     } else {
-//         $('.bar-contr-file .has-num').hide();
-//     }
-// });
+$(function(){
+    $("#firstMenu").click();
+    $(".nav-header").click(function(){
+        $(this).find("span").toggleClass('glyphicon-chevron-down');
+        $(this).find("span").toggleClass('glyphicon-chevron-right');
+    });
+});
 
 function initMenu(data) {
     $.each(data, function (i, obj) {
